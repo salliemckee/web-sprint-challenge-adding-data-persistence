@@ -2,7 +2,7 @@
 const db = require("../../data/dbConfig");
 
 const getAll = () => {
-  return db("project");
+  return db("projects");
 };
 
 module.exports = { getAll };

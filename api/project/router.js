@@ -8,8 +8,9 @@ router.post((req, res, next) => {});
 router.get("/", async (req, res, next) => {
   try {
     const projects = await Project.getAll();
-  } catch (err) {
-    next(err);
+    res.json(projects);
+  } catch (error) {
+    next(error);
   }
 });
 
