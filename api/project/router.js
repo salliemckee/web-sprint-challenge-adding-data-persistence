@@ -3,7 +3,15 @@ const express = require("express");
 const router = express.Router();
 const Project = require("./model");
 
-router.post((req, res, next) => {});
+router.post("/", (req, res, next) => {
+  const newProject = req.body;
+
+  Project.add(newProject)
+    .then((project) => {
+      res.status(201).json(project);
+    })
+    .catch(next);
+});
 
 router.get("/", async (req, res, next) => {
   try {

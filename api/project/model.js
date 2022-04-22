@@ -5,4 +5,12 @@ const getAll = () => {
   return db("projects");
 };
 
-module.exports = { getAll };
+const add = (project) => {
+  return db("projects")
+    .insert(project)
+    .then(([project_id]) => {
+      return db("projects").where("project_id", project_id).first();
+    });
+};
+
+module.exports = { getAll, add };

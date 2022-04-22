@@ -3,7 +3,15 @@ const express = require("express");
 const router = express.Router();
 const Resource = require("./model");
 
-// router.post((req, res, next) => {});
+router.post("/", (req, res, next) => {
+  const newResource = req.body;
+
+  Resource.add(newResource)
+    .then((resource) => {
+      res.status(201).json(resource);
+    })
+    .catch(next);
+});
 
 router.get("/", async (req, res, next) => {
   try {
