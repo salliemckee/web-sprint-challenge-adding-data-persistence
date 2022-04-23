@@ -8,6 +8,12 @@ router.post("/", (req, res, next) => {
 
   Task.add(newTask)
     .then((task) => {
+      if (task.task_completed === 0) {
+        task.task_completed = false;
+      } else {
+        task.task_completed = true;
+      }
+
       res.status(201).json(task);
     })
     .catch(next);
@@ -16,6 +22,15 @@ router.post("/", (req, res, next) => {
 router.get("/", async (req, res, next) => {
   try {
     const tasks = await Task.getAll();
+
+    tasks.forEach((task) => {
+      if (task.task_completed === 0) {
+        task.task_completed = false;
+      } else {
+        task.task_completed = true;
+      }
+    });
+
     res.json(tasks);
   } catch (error) {
     next(error);
